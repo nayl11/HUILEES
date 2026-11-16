@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>213Huiles - Huiles d'Olives Artisanales de Qualité</title>
+    <meta name="description" content="Découvrez nos huiles d'olives artisanales premium, pressées à froid et issues de l'agriculture biologique. Livraison rapide partout en France.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vert-the': '#214D1B',
+                        'or': '#D4AF37',
+                        'creme': '#F5F5DC'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'opensans': ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .cart-count {
+            transition: all 0.3s ease;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .nav-menu {
+            transition: all 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="font-opensans text-gray-800 bg-creme min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="text-2xl font-playfair font-bold text-vert-the">213Huiles</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="text-gray-700 hover:text-vert-the transition-colors">Accueil</a>
+                    <a href="#huiles" class="text-gray-700 hover:text-vert-the transition-colors">Huiles</a>
+                    <a href="#histoire" class="text-gray-700 hover:text-vert-the transition-colors">À propos</a>
+                    <a href="#contact" class="text-gray-700 hover:text-vert-the transition-colors">Contact</a>
+                </div>
+
+                <!-- Cart -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="cart-button" class="text-gray-700 hover:text-vert-the transition-colors">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cart-count" class="cart-count absolute -top-2 -right-2 bg-or text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="nav-menu hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#accueil" class="text-gray-700 hover:text-vert-the transition-colors py-2">Accueil</a>
+                    <a href="#huiles" class="text-gray-700 hover:text-vert-the transition-colors py-2">Huiles</a>
+                    <a href="#histoire" class="text-gray-700 hover:text-vert-the transition-colors py-2">À propos</a>
+                    <a href="#contact" class="text-gray-700 hover:text-vert-the transition-colors py-2">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- Hero Section -->
+        <section id="accueil" class="relative bg-vert-the text-white">
+            <div class="container mx-auto px-4 py-20">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="fade-in">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">L'Art de l'Olive Réinventé</h1>
+                        <p class="text-xl mb-6">Découvrez nos huiles d'olives artisanales pressées à froid, issues de l'agriculture biologique et du terroir algérien.</p>
+                        <button class="bg-or hover:bg-yellow-600 text-white px-8 py-3 rounded-full font-semibold transition-colors">
+                            Découvrir nos produits
+                        </button>
+                    </div>
+                    <div class="fade-in">
+                        <img 
+                            src="https://i.pinimg.com/736x/48/c5/2a/48c52ad886b73a9a3f0df4c5a4bfa891.jpg" 
+                            alt="Bouteilles d'huile d'olive artisanale 213Huiles" 
+                            class="w-80 rounded-lg shadow-2xl"
+                            loading="lazy"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="huiles" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-playfair font-bold text-center text-vert-the mb-12">Nos Huiles d'Exception</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="https://i.pinimg.com/736x/af/ba/99/afba99fdc4e50840b92c794fcdb31fdc.jpg" 
+                            alt="Huile d'olive extra vierge bio" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Extra Vierge Bio</h3>
+                        <p class="text-gray-600 mb-4">Notre huile premium, pressée à froid et issue de l'agriculture biologique.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">24,90€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="1" data-name="Extra Vierge Bio" data-price="24.90">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="https://www.bienmanger.com/tinyMceData/images/contents/1719/content_lg.jpg" 
+                            alt="Huile d'olive aux herbes de Provence" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Aux Herbes de Provence</h3>
+                        <p class="text-gray-600 mb-4">Une délicieuse infusion d'herbes aromatiques de Provence.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">26,50€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="2" data-name="Aux Herbes de Provence" data-price="26.50">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="https://gardeninthekitchen.com/wp-content/uploads/2016/06/rosemary-lemon-oil2.jpg" 
+                            alt="Huile d'olive citronnée" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Citronnée</h3>
+                        <p class="text-gray-600 mb-4">La fraîcheur du citron algérien dans une huile d'exception.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">22,90€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="3" data-name="Citronnée" data-price="22.90">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="https://static01.nyt.com/images/2011/12/06/science/07recipehealth/07recipehealth-jumbo-v2.jpg" 
+                            alt="Huile d'olive pimentée" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Pimentée</h3>
+                        <p class="text-gray-600 mb-4">Une touche d'épice pour réveiller vos plats avec élégance.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">25,75€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="4" data-name="Pimentée" data-price="25.75">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="https://i.pinimg.com/1200x/d6/97/31/d69731675ba6f9a686aa62ebaf9711d7.jpg" 
+                            alt="Huile d'olive aux truffes" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Aux Truffes</h3>
+                        <p class="text-gray-600 mb-4">Le luxe et le raffinement de la truffe noire dans chaque goutte.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">39,90€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="5" data-name="Aux Truffes" data-price="39.90">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="product-card bg-creme rounded-lg p-6 shadow-md">
+                        <img 
+                            src="image.png" 
+                            alt="Huile d'olive vintage" 
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                            loading="lazy"
+                        >
+                        <h3 class="text-xl font-playfair font-semibold text-vert-the mb-2">Vintage 2023</h3>
+                        <p class="text-gray-600 mb-4">Notre cuvée spéciale millésimée, un cru d'exception limité.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-or">45,00€</span>
+                            <button class="add-to-cart bg-vert-the hover:bg-green-800 text-white px-4 py-2 rounded-full transition-colors" data-id="6" data-name="Vintage 2023" data-price="45.00">
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section id="histoire" class="py-20 bg-vert-the text-white">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <img 
+                            src="lhajj.png" 
+                            alt="Notre moulin à huile traditionnel" 
+                            class="w-full rounded-lg shadow-2xl"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="fade-in">
+                        <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-6">Notre Histoire</h2>
+                        <p class="text-lg mb-4">
+                            Fondée en 2013, 213Huiles puise ses racines dans la riche tradition oléicole algérienne. 
+                            Notre passion pour l'olive et le savoir-faire artisanal nous guide depuis maintenant une décennie.
+                        </p>
+                        <p class="text-lg mb-4">
+                            Chaque bouteille raconte une histoire : celle des oliviers centenaires, du travail méticuleux 
+                            de nos producteurs partenaires et de notre engagement pour une qualité exceptionnelle.
+                        </p>
+                        <p class="text-lg">
+                            Aujourd'hui, nous sommes fiers de vous proposer des huiles d'olive qui célèbrent le terroir, 
+                            l'authenticité et le plaisir gustatif.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-playfair font-bold text-center text-vert-the mb-12">Contactez-nous</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Nos coordonnées</h3>
+                        <p class="text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt text-or mr-2"></i>
+                            123 Rue de l'Olive,  Marseille
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            <i class="fas fa-phone text-or mr-2"></i>
+                            +33 7 69 97 00 21
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            <i class="fas fa-envelope text-or mr-2"></i>
+                            contact@213huiles.fr
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-vert-the hover:text-or transition-colors">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="text-vert-the hover:text-or transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="text-vert-the hover:text-or transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Votre nom" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or">
+                            <input type="email" placeholder="Votre email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or">
+                            <textarea placeholder="Votre message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or"></textarea>
+                            <button type="submit" class="bg-vert-the hover:bg-green-800 text-white px-8 py-3 rounded-full font-semibold transition-colors">
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-playfair font-semibold mb-4">213Huiles</h3>
+                    <p class="text-gray-400">L'excellence de l'huile d'olive artisanale depuis 2013.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-or transition-colors">Accueil</a></li>
+                        <li><a href="#huiles" class="text-gray-400 hover:text-or transition-colors">Huiles</a></li>
+                        <li><a href="#histoire" class="text-gray-400 hover:text-or transition-colors">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-or transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Informations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Livraison</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">CGV</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Inscrivez-vous pour recevoir nos actualités</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 rounded-l-lg focus:outline-none">
+                        <button class="bg-or hover:bg-yellow-600 px-4 py-2 rounded-r-lg transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 213Huiles. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="absolute right-0 top-0 h-full w-full md:w-96 bg-white shadow-2xl transform transition-transform">
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-playfair font-semibold">Votre Panier</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-vert-the">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-grow overflow-y-auto mb-4">
+                    <!-- Cart items will be added here -->
+                </div>
+                <div class="border-t pt-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-semibold">Total:</span>
+                        <span id="cart-total" class="text-xl font-bold text-or">0,00€</span>
+                    </div>
+                    <a href="commande.html" 
+   class="w-full bg-vert-the hover:bg-green-800 text-white py-3 rounded-full font-semibold transition-colors block text-center">
+    Commander maintenant
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define products data
+        const products = [
+            { "id": 1, "name": "Extra Vierge Bio", "price": 24.90, "image": "https://i.pinimg.com/736x/af/ba/99/afba99fdc4e50840b92c794fcdb31fdc.jpg" },
+            { "id": 2, "name": "Aux Herbes de Provence", "price": 26.50, "image": "https://www.bienmanger.com/tinyMceData/images/contents/1719/content_lg.jpg" },
+            { "id": 3, "name": "Citronnée", "price": 22.90, "image": "https://gardeninthekitchen.com/wp-content/uploads/2016/06/rosemary-lemon-oil2.jpg" },
+            { "id": 4, "name": "Pimentée", "price": 25.75, "image": "https://static01.nyt.com/images/2011/12/06/science/07recipehealth/07recipehealth-jumbo-v2.jpg" },
+            { "id": 5, "name": "Aux Truffes", "price": 39.90, "image": "https://i.pinimg.com/1200x/d6/97/31/d69731675ba6f9a686aa62ebaf9711d7.jpg" },
+            { "id": 6, "name": "Vintage 2023", "price": 45.00, "image": "image.png" }
+        ];
+
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCount = document.getElementById('cart-count');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        // Update cart display
+        function updateCartDisplay() {
+            // Update count
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center">Votre panier est vide</p>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center justify-between py-3 border-b';
+                    cartItem.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded">
+                            <div>
+                                <p class="font-semibold">${item.name}</p>
+                                <p class="text-or">${item.price}€</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="decrease-quantity text-gray-500 hover:text-vert-the" data-id="${item.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="w-8 text-center">${item.quantity}</span>
+                            <button class="increase-quantity text-gray-500 hover:text-vert-the" data-id="${item.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+            
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `${total.toFixed(2)}€`;
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                const product = products.find(p => p.id === id);
+                
+                const existingItem = cart.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartDisplay();
+                
+                // Show success animation
+                e.target.classList.add('bg-green-600');
+                setTimeout(() => {
+                    e.target.classList.remove('bg-green-600');
+                }, 300);
+            });
+        });
+
+        // Cart modal functionality
+        document.getElementById('cart-button').addEventListener('click', () => {
+            cartModal.classList.remove('hidden');
+        });
+
+        document.getElementById('close-cart').addEventListener('click', () => {
+            cartModal.classList.add('hidden');
+        });
+
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('mobile-menu');
+            const menuButton = document.getElementById('mobile-menu-button');
+            
+            if (!menu.contains(e.target) && !menuButton.contains(e.target) && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Initialize cart display
+        updateCartDisplay();
+
+        // Add event delegation for quantity buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.increase-quantity')) {
+                const id = parseInt(e.target.closest('.increase-quantity').dataset.id);
+                const item = cart.find(item => item.id === id);
+                if (item) {
+                    item.quantity++;
+                    updateCartDisplay();
+                }
+            }
+            
+            if (e.target.closest('.decrease-quantity')) {
+                const id = parseInt(e.target.closest('.decrease-quantity').dataset.id);
+                const item = cart.find(item => item.id === id);
+                if (item) {
+                    item.quantity--;
+                    if (item.quantity === 0) {
+                        cart = cart.filter(cartItem => cartItem.id !== id);
+                    }
+                    updateCartDisplay();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

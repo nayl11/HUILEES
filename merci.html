@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de Commande - 213Huiles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vert-the': '#214D1B',
+                        'or': '#D4AF37',
+                        'creme': '#F5F5DC'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'opensans': ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            z-index: 1000;
+        }
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #214D1B;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+            box-shadow: 0 0 0 #214D1B;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        @keyframes fill {
+            100% { box-shadow: 0 0 0 30px transparent; }
+        }
+    </style>
+</head>
+<body class="font-opensans text-gray-800 bg-creme min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-2xl font-playfair font-bold text-vert-the">213Huiles</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-vert-the transition-colors">
+                        <i class="fas fa-home text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
+            <!-- Animated Checkmark -->
+            <svg class="checkmark mb-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+            
+            <h1 class="text-3xl md:text-4xl font-playfair font-bold text-vert-the mb-4">
+                Commande Confirmée !
+            </h1>
+            
+            <p class="text-lg text-gray-600 mb-8">
+                Merci pour votre commande. Votre numéro de confirmation est <span id="orderNumber" class="font-semibold text-or">#213HL-2024</span>.
+            </p>
+            
+            <div class="bg-gray-50 rounded-lg p-6 mb-8 text-left">
+                <h2 class="text-xl font-playfair font-semibold text-vert-the mb-4">Récapitulatif de la commande</h2>
+                
+                <div id="orderItems" class="space-y-4 mb-6">
+                    <!-- Les produits seront insérés ici dynamiquement -->
+                </div>
+                
+                <div class="space-y-2 border-t pt-4">
+                    <div class="flex justify-between">
+                        <span>Sous-total</span>
+                        <span id="subtotal">0,00€</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Livraison</span>
+                        <span id="shipping">4,90€</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold mt-2">
+                        <span>Total</span>
+                        <span id="total" class="text-or">0,00€</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-lg p-6 mb-8 text-left">
+                <h2 class="text-xl font-playfair font-semibold text-vert-the mb-4">Informations de livraison</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-semibold">Adresse de livraison</p>
+                        <p id="shippingAddress" class="text-gray-600">Chargement...</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Mode de livraison</p>
+                        <p id="shippingMethod" class="text-gray-600">Chargement...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-600 mb-8">
+                Un email de confirmation a été envoyé à <span id="customerEmail" class="font-semibold">chargement...</span> avec tous les détails de votre commande.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html#huiles" class="bg-vert-the hover:bg-green-800 text-white px-6 py-3 rounded-full font-semibold transition-colors">
+                    Continuer mes achats
+                </a>
+                <a href="#" class="border border-vert-the text-vert-the hover:bg-vert-the hover:text-white px-6 py-3 rounded-full font-semibold transition-colors">
+                    Suivre ma commande
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-playfair font-semibold mb-4">213Huiles</h3>
+                    <p class="text-gray-400">L'excellence de l'huile d'olive artisanale depuis 2013.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Service Client</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Contactez-nous</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Livraison & Retours</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Informations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Conditions générales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-or transition-colors">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 213Huiles. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fonction pour formater le prix
+        function formatPrice(price) {
+            return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
+        }
+
+        // Fonction pour générer un numéro de commande unique
+        function generateOrderNumber() {
+            const timestamp = new Date().getTime().toString().slice(-6);
+            return `#213HL-${timestamp}`;
+        }
+
+        // Fonction pour afficher les produits de la commande
+        function displayOrderItems() {
+            const orderItemsContainer = document.getElementById('orderItems');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            const shippingElement = document.getElementById('shipping');
+            const shippingAddressElement = document.getElementById('shippingAddress');
+            const shippingMethodElement = document.getElementById('shippingMethod');
+            const customerEmailElement = document.getElementById('customerEmail');
+            const orderNumberElement = document.getElementById('orderNumber');
+
+            // Récupérer les données du localStorage
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const shippingCost = parseFloat(localStorage.getItem('shippingCost')) || 4.90;
+            const customerInfo = JSON.parse(localStorage.getItem('customerInfo')) || {};
+            const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo')) || {};
+
+            // Générer et afficher le numéro de commande
+            const orderNumber = generateOrderNumber();
+            orderNumberElement.textContent = orderNumber;
+
+            // Vider le conteneur des articles
+            orderItemsContainer.innerHTML = '';
+
+            let subtotal = 0;
+
+            // Afficher chaque produit
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex justify-between items-center border-b pb-3';
+                itemElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded">
+                        <div>
+                            <p class="font-semibold">${item.name}</p>
+                            <p class="text-sm text-gray-500">Quantité: ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <span class="font-semibold">${formatPrice(itemTotal)}</span>
+                `;
+                orderItemsContainer.appendChild(itemElement);
+            });
+
+            // Calculer le total
+            const total = subtotal + shippingCost;
+
+            // Afficher les totaux
+            subtotalElement.textContent = formatPrice(subtotal);
+            shippingElement.textContent = formatPrice(shippingCost);
+            totalElement.textContent = formatPrice(total);
+
+            // Afficher les informations de livraison
+            if (shippingInfo.address) {
+                shippingAddressElement.innerHTML = `
+                    ${customerInfo.firstName || ''} ${customerInfo.lastName || ''}<br>
+                    ${shippingInfo.address}<br>
+                    ${shippingInfo.postalCode || ''} ${shippingInfo.city || ''}<br>
+                    ${shippingInfo.country || 'France'}
+                `;
+            }
+
+            shippingMethodElement.textContent = shippingInfo.method || 'Livraison standard\nDélai estimé: 3-5 jours ouvrables';
+            customerEmailElement.textContent = customerInfo.email || 'jean.dupont@email.com';
+
+            // Vider le panier après confirmation (optionnel)
+            localStorage.removeItem('cartItems');
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#214D1B', '#D4AF37', '#F5F5DC', '#8B4513', '#CD853F'];
+            const container = document.body;
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
+                container.appendChild(confetti);
+                
+                // Remove confetti after animation completes
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Run when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            displayOrderItems();
+            createConfetti();
+        });
+    </script>
+</body>
+</html>
